@@ -1,5 +1,4 @@
 import { supabase } from '@/lib/supabase';
-import axios from 'axios';
 import cheerio from 'cheerio';
 import { NextRequest, NextResponse } from 'next/server'
 
