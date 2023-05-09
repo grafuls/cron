@@ -1,5 +1,6 @@
 import { Layout, Text, Code, Page, Link } from '@vercel/examples-ui'
 import Post from '@/components/post'
+import TomatoPrices from '@/components/tomatoPrices'
 import Head from 'next/head'
 
 export default function Home({ data }: { data: any }) {
@@ -18,6 +19,7 @@ export default function Home({ data }: { data: any }) {
           <div className="flex flex-col gap-6">
             <div className="flex justify-between items-center">
               <Post />
+              <TomatoPrices />
             </div>
           </div>
         </div>
