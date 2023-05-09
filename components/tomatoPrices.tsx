@@ -5,33 +5,19 @@ import Chart from 'chart.js/auto';
 import {CategoryScale} from 'chart.js'; 
 Chart.register(CategoryScale);
 
-type TomatoPrice = {
-  timestamp: string;
-  price: number;
-};
-
 export default function TomatoPrices() {
-  const chartRef = useRef<Line>(null);
 
   const { data } = useSWR(`/api/all/`, (url) =>
     fetch(url).then((res) => res.json())
   )
 
-  useEffect(() => {
-    if (chartRef.current) {
-      if (chartRef.current.chartInstance){
-        chartRef.current.chartInstance.update();
-      }
-    }
-  });
-
   if (data) {
     const chartData = {
-      labels: data.map((item) => item.timestamp),
+      labels: data.map((item: { timestamp: string; }) => item.timestamp),
       datasets: [
         {
           label: 'Precio del tomate',
-          data: data.map((item) => item.price),
+          data: data.map((item: { price: number; }) => item.price),
           backgroundColor: 'rgba(255, 99, 132, 0.2)',
           borderColor: 'rgba(255, 99, 132, 1)',
           borderWidth: 1,
@@ -39,7 +25,7 @@ export default function TomatoPrices() {
       ],
     };
   
-    return <Line ref={chartRef} data={chartData} />;
+    return <Line data={chartData} />;
 
   } else {
     return <div />;
